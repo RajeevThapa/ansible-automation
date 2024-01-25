@@ -1,0 +1,30 @@
+---
+# Ansible playbook to deploy a Docker container
+
+# Define the play to be executed on 'servers'
+- name: Deploy Docker container
+  hosts: servers
+  become: true  # Run tasks with elevated privileges
+
+  # List of tasks to be executed
+  tasks:
+    # Task 1: Install Docker library using pip
+    - name: Install Docker library
+      pip:
+        name: docker
+
+    # Task 2: Pull the Docker image from the repository
+    - name: Pull Docker image
+      docker_image:
+        name: rajeevmagar/calculator:v1.0.1
+        source: pull
+
+    # Task 3: Run the Docker container
+    - name: Run Docker container
+      docker_container:
+        name: my-app
+        image: rajeevmagar/calculator:v1.0.1
+        state: started
+        restart_policy: always
+        ports:
+          - "3000:3000"  # Map host port 3000 to container port 3000

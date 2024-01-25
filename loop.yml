@@ -1,0 +1,39 @@
+---
+# Playbook for installing packages on Ubuntu and CentOS servers using loops
+
+# Playbook name
+- name: Using Loops
+
+  # Specifies the target hosts for the playbook
+  hosts: servers
+
+  # Run tasks as sudo
+  become: yes
+
+  # Variable definition for the list of packages to install
+  vars:
+    packages_to_install:
+      - nmap
+      - htop
+      - git
+
+  # List of tasks to be executed within the playbook
+  tasks:
+
+    # Task: Install packages on Ubuntu
+    - name: Install packages on Ubuntu
+      # Ansible apt module for managing packages on Debian-based systems
+      apt:
+        name: "{{ packages_to_install }}"
+        state: present
+      # Condition: Execute only when the target host is a Debian-based system
+      when: ansible_facts['os_family'] == "Debian"
+
+    # Task: Install packages on CentOS
+    - name: Install packages on CentOS
+      # Ansible yum module for managing packages on Red Hat-based systems
+      yum:
+        name: "{{ packages_to_install }}"
+        state: present
+      # Condition: Execute only when the target host is a Red Hat-based system
+      when: ansible_facts['os_family'] == "RedHat"

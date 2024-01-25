@@ -1,0 +1,22 @@
+# Configuration under /etc/ansible/hosts
+
+# Target host
+[servers]
+
+# ubuntu with SSH key authentication on port 2222. /Server
+# centos with SSH key authentication on port 2200. /Rhel
+# Uses user "vagrant and ssh key location ~/.ssh/Access-Host.
+ubuntu ansible_user=vagrant ansible_port=2222 ansible_ssh_private_key_file=~/.ssh/Access-Host
+centos ansible_user=vagrant ansible_port=2200 ansible_ssh_private_key_file=~/.ssh/Access-Host
+
+# Global variables that apply to all hosts defined in this inventory file.
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+
+# Configuration under /etc/hosts
+
+# For Ansible Server /etc/ansible/hosts
+  127.0.0.1     ubuntu
+  127.0.0.1     centos
+
