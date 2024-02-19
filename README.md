@@ -52,4 +52,5 @@ The Ansible inventory file `/etc/hosts` is configured with target hosts and glob
 127.0.0.1     ubuntu
 127.0.0.1     centos
 ```
+![Draft](https://github.com/RajeevThapa/ansible-automation/assets/101322664/d9ae368c-ea33-4530-88f9-8419a650b8b0)
 
